@@ -1,5 +1,6 @@
 package com.example.PizzaDelivery.service;
 
+import com.example.PizzaDelivery.exception.PizzaNotFoundException;
 import com.example.PizzaDelivery.model.Category;
 import com.example.PizzaDelivery.model.Pizza;
 import com.example.PizzaDelivery.repository.PizzaRepository;
@@ -31,5 +32,15 @@ public class PizzaService {
         }
 
         return pizzaRepository.save(pizza);
+    }
+
+    public Pizza updatePizza(Long pizzaId, Pizza pizza) throws PizzaNotFoundException {
+        Pizza newPizza = new Pizza();
+        newPizza.setPizzaId(pizzaId);
+        newPizza.setPizzaName(pizza.getPizzaName());
+        newPizza.setPrice(pizza.getPrice());
+        newPizza.setCategory(pizza.getCategory());
+
+        return pizzaRepository.save(newPizza);
     }
 }

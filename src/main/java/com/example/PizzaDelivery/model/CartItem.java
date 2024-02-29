@@ -15,7 +15,7 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cartItemId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Pizza pizza;
     private Integer quantity;
 }

@@ -17,20 +17,19 @@ public class CartItemService {
     private CartItemRepo cartItemRepo;
     @Autowired
     private PizzaService pizzaService;
+    @Autowired
+    private CategoryService categoryService;
 
     public void saveCartItem(CartItem i) {
-        System.out.println("SAVING CART ITEM and PIZZA....");
-
+        Pizza pizza = i.getPizza();
         Category category = i.getPizza().getCategory();
-        category.setCategoryName(category.getCategoryName().toUpperCase());
-
-        Pizza pizza = new Pizza();
-        pizza.setPizzaName(i.getPizza().getPizzaName());
-        pizza.setCategory(category);
-        pizza.setPrice(i.getPizza().getPrice());
-
-        cartItemRepo.save(i);
-
+        String categoryName = category.getCategoryName().toUpperCase();
+        Category category1 = categoryService.getCategoryByName(categoryName);
+        if(category1 == null){
+            Category newCategory = categoryService.saveCategory(category);
+            pizza.setCategory(newCategory);
+        }
         pizzaService.savePizza(pizza);
+        cartItemRepo.save(i);
     }
 }

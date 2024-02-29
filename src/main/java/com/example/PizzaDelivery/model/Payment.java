@@ -12,13 +12,6 @@ import lombok.NoArgsConstructor;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer paymentId;
-
-    private  Boolean status;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private  Customer customer;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Order order;
+    private Long paymentId;
+    private Boolean status;
 }

@@ -18,7 +18,7 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer pizzaId;
+    private Long pizzaId;
 
     @NotNull(message = "Price cannot be null")
     @Positive(message = "Price must be a positive value")
@@ -27,8 +27,7 @@ public class Pizza {
     @NotBlank(message = "Pizza name cannot be blank")
     private String pizzaName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
+    @ManyToOne
     private Category category;
 
 }

@@ -1,5 +1,6 @@
 package com.example.PizzaDelivery.controller;
 
+import com.example.PizzaDelivery.exception.UserNotFoundException;
 import com.example.PizzaDelivery.model.Customer;
 import com.example.PizzaDelivery.model.LoginDTO;
 import com.example.PizzaDelivery.model.RegisterDTO;
@@ -34,7 +35,7 @@ public class CustomerController {
         try {
             Customer customer = customerService.getCustomerById(customerId);
             return ResponseEntity.ok(customer.getOrders());
-        }catch (Exception e){
+        }catch (UserNotFoundException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -49,5 +50,31 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/orders/{customerId}")
+    public ResponseEntity<?> getOrdersByCustomer(@PathVariable Long customerId){
+        try{
+            return ResponseEntity.ok(customerService.getAllOrders(customerId));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/cart/{customerId}")
+    public ResponseEntity<?> getCartByCustomer(@PathVariable Long customerId){
+        try{
+            return ResponseEntity.ok().body(customerService.getCartByCustomerId(customerId));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/payment/{customerId}")
+    public ResponseEntity<?> getPaymentsByCustomer(@PathVariable Long customerId){
+        try{
+            return ResponseEntity.ok().body(customerService.getPayments(customerId));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

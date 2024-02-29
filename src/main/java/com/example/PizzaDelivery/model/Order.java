@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,15 +16,16 @@ import lombok.NoArgsConstructor;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer orderId;
+    private Long orderId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cart cart;
+    @OneToMany
+    private List<CartItem> orderedItems;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JsonIgnore
+    private Customer customer;
+
+    @OneToOne
     @JsonIgnore
     private Payment payment;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Customer customer;
 }

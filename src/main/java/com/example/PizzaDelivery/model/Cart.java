@@ -16,9 +16,14 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cartId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<CartItem> pizzas;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Customer customer;
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", pizzas=" + pizzas +
+                '}';
+    }
 }

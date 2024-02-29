@@ -14,11 +14,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long addressId;
-
     private String street;
     private String city;
     private String state;
-
-    @OneToOne
-    private Customer customer;
 }

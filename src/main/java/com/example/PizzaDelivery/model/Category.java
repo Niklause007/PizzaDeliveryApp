@@ -14,11 +14,8 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int categoryId;
-
-    @Column(unique = true)
+    private Long categoryId;
     private String categoryName;
-
     @Override
     public String toString() {
         return "Category{" +
